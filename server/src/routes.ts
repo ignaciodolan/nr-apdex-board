@@ -9,6 +9,7 @@ export class Routes {
   public routes(app): void {
     app.route('/hosts').get(this.hostController.listHosts);
     app.route('/hosts/:hostUrl/applications/').get(this.hostController.listApplicationsByHost);
+    app.route('/hosts/:hostUrl/applications/').post(this.hostController.addApplicationToHost);
   }
 }
 

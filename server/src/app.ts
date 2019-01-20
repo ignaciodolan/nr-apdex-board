@@ -3,6 +3,7 @@ import * as bodyParser from "body-parser";
 import { Routes } from "./routes";
 import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
+import * as expressValidator from "express-validator";
 
 class App {
 
@@ -13,6 +14,7 @@ class App {
     this.app = express();
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: false }));
+    this.app.use(expressValidator());
     this.router.routes(this.app);
     dotenv.config({ path: ".env" });
     this.initializeMongoDB();

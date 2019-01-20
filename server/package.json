@@ -5,7 +5,7 @@
   "scripts": {
     "test": "jest --forceExit --coverage --verbose",
     "build": "tsc",
-    "watch": "ts-node ./server.ts",
+    "watch": "ts-node ./src/server.ts",
     "start": "nodemon ./dist/server.js",
     "production": "npm run build && npm run start"
   },
@@ -15,6 +15,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-validator": "^4.3.0",
     "mongoose": "^5.4.5",
     "dotenv": "^4.0.0"
   },

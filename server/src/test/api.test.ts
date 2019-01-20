@@ -1,5 +1,5 @@
 import * as request from 'supertest';
-import app from "../app";
+import app from "app.ts";
 
 describe("GET /hosts", () => {
   it("should return 200", () => {
