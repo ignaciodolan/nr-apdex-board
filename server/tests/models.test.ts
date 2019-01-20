@@ -1,7 +1,7 @@
 import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
-import Host  from '../models/Host';
-import Application from '../models/Application';
+import Host  from 'src/models/Host';
+import Application from 'src/models/Application';
 
 let connection;
 

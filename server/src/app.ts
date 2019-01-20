@@ -22,7 +22,7 @@ class App {
 
   private initializeMongoDB(): void{
     mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.MONGODB_URI_LOCAL);
+    mongoose.connect(process.env.MONGODB_URI_LOCAL, { useNewUrlParser: true });
     mongoose.connection.on('error', (err) => {
       console.error(`Error with MongoDB connection: ${err.message}`);
     });
