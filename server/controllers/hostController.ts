@@ -1,20 +1,43 @@
-import * as mongoose from 'mongoose';
-import { HostSchema } from '../models/Host';
+// TODO fix this require, if not using it i can't populate Applications
+require('../models/Application');
+import  Host  from '../models/Host';
 import { Request, Response } from 'express';
 
-const Host = mongoose.model('Host', HostSchema);
 export class HostController {
 
   public listHosts(req: Request, res: Response) {
-    res.status(200).send({
-      hosts: []
-    })
+    Host.find()
+      .populate('applications')
+      .exec(function (err, hosts) {
+        if (err){
+          if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+              message: "Host not found with given host url " + req.params.subjectId
+            });
+          }
+          return res.status(500).send({
+            message: "Error retrieving Host with given host Id " + req.params.subjectId
+          });
+        }
+        res.status(200).json({hosts});
+      });
   }
+
   public listApplicationsByHost(req: Request, res: Response) {
-    console.log(req.params);
-    res.status(200).send({
-      host: req.params.host,
-      applications: []
-    })
+    Host.find({url: req.params.hostUrl})
+      .populate('applications')
+      .exec(function (err, hosts) {
+        if (err){
+          if(err.kind === 'ObjectId') {
+            return res.status(404).send({
+              message: "Application not found with given host Id " + req.params.subjectId
+            });
+          }
+          return res.status(500).send({
+            message: "Error retrieving Student with given subject Id " + req.params.subjectId
+          });
+        }
+        res.status(200).json({hosts});
+      });
   }
 }

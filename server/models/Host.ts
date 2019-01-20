@@ -2,14 +2,15 @@ import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-export const HostSchema = new Schema({
+const hostSchema = new Schema({
   url: {
     type: String,
     required: 'Enter url'
   },
-  applications : [
+  applications: [
     {
-      type: Schema.Types.ObjectId, ref: 'Application'
+      type: Schema.Types.ObjectId,
+      ref: 'Application'
     }
   ],
   created_at: {
@@ -21,3 +22,5 @@ export const HostSchema = new Schema({
     default: Date.now
   }
 });
+const Host = mongoose.model('Host', hostSchema);
+export default Host;

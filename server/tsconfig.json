@@ -6,7 +6,10 @@
     "sourceMap": true,
     "target": "es6",
     "outDir": "./dist",
-    "baseUrl": "./lib"
+    "baseUrl": "./lib",
+    "lib": [
+      "es2017","es2015","dom","es6"
+    ]
   },
   "include": [
     "**/*.ts"

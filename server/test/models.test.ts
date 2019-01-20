@@ -17,49 +17,25 @@ afterAll(async () => {
   await connection.close();
 });
 
-async function createApplicationsAndHost() {
-  const application = new Application({
-      "name": "Small Fresh Pants - Kautzer - Boyer, and Sons",
-      "contributors": ["Edwin Reinger", "Ofelia Dickens", "Hilbert Cole", "Helen Kuphal", "Maurine McDermott Sr."],
-      "version": 7,
-      "apdex": 68,
-    }
-  );
-  await application.save();
-  const host = new Host({
-      url: '7e6272f7-098e.dakota.biz'
-    }
-  );
-  host.applications.push(application._id);
-  await host.save();
-}
-
 describe("Model: Application", () => {
-  it("should save the host and the id of the new application", async (done) => {
-    const application = await new Application({
+  it("should save the application and the id of the new application", async () => {
+    await new Application({
         "name": "Small Fresh Pants - Kautzer - Boyer, and Sons",
         "contributors": ["Edwin Reinger", "Ofelia Dickens", "Hilbert Cole", "Helen Kuphal", "Maurine McDermott Sr."],
         "version": 7,
         "apdex": 68,
       }
     ).save();
-    const host = new Host({
-        url: '7e6272f7-098e.dakota.biz'
-      }
-    );
-    host.applications.push(application._id);
-    await host.save();
-
-    const expectedHost = await Host.findOne({ url: '7e6272f7-098e.dakota.biz' });
-    expect(expectedHost.url).toEqual('7e6272f7-098e.dakota.biz');
-    expect(expectedHost.applications.length).toEqual(1);
-    console.log(expectedHost.applications[0]);
-    expect(expectedHost.applications[0]._id).toEqual(application._id);
+    const applications = await Application.find({});
+    expect(applications.length).toEqual(1);
+    expect(applications[0].name).toEqual("Small Fresh Pants - Kautzer - Boyer, and Sons");
+    expect(applications[0].created_at).toBeDefined();
+    expect(applications[0].updated_at).toBeDefined();
   });
 });
 
 describe("Model: Host", () => {
-  it("should save the host and the id of the new application", async (done) => {
+  it("should save the host and the id of the new application", async () => {
     const application = await new Application({
         "name": "Small Fresh Pants - Kautzer - Boyer, and Sons",
         "contributors": ["Edwin Reinger", "Ofelia Dickens", "Hilbert Cole", "Helen Kuphal", "Maurine McDermott Sr."],

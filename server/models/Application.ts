@@ -2,23 +2,18 @@ import * as mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
 
-export const ApplicationSchema = new Schema({
+const applicationSchema = new Schema({
   name: {
     type: String,
     required: 'Enter name'
   },
   contributors: [String],
   version: {
-    type: String
-  },
-  hosts: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Host'
-    }
-  ],
-  apdex: {
     type: Number
+  },
+  apdex: {
+    type: Number,
+    required: 'Enter Apdex'
   },
   created_at: {
     type: Date,
@@ -29,3 +24,5 @@ export const ApplicationSchema = new Schema({
     default: Date.now
   }
 });
+const Application = mongoose.model('Application', applicationSchema);
+export default Application;
