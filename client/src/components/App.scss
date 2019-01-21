@@ -45,10 +45,15 @@
       .list {
         list-style: none;
         padding: 0px;
+        margin: 0px;
         &__item {
           display: flex;
           align-items: center;
           line-height: 19px;
+          margin-bottom: 23px;
+        }
+        &__item:last-child {
+          margin-bottom: 0px;
         }
         &__link {
           text-decoration: none;

@@ -24,12 +24,6 @@ class App extends Component {
                 <li className="list__item">
                   <a className="list__link">
                     <span>99</span>
-                    Small Fresh Pants - Kautzer - Boyer, and Sons
-                  </a>
-                </li>
-                <li className="list__item">
-                  <a className="list__link">
-                    <span>99</span>
                     Rustic Soft Sausages - Pagac, O'Keefe and Schaefer, LLC
                   </a>
                 </li>
@@ -92,12 +86,6 @@ class App extends Component {
                   <a className="list__link">
                     <span>99</span>
                     Rustic Soft Sausages - Pagac, O'Keefe and Schaefer, LLC
-                  </a>
-                </li>
-                <li className="list__item">
-                  <a className="list__link">
-                    <span>99</span>
-                    Ergonomic Fresh Hat - Cormier, Lemke and Jaskolski, LLC
                   </a>
                 </li>
               </ul>
