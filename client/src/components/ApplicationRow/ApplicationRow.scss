@@ -1,0 +1,27 @@
+
+.list {
+
+  &__item {
+    display: flex;
+    align-items: center;
+    line-height: 19px;
+    margin-bottom: 23px;
+  }
+
+  &__item:last-child {
+    margin-bottom: 0px;
+  }
+
+  &__link {
+    text-decoration: none;
+    font-size: 16px;
+    color: #4A4A4A;
+    display: flex;
+  }
+
+  &__link > span {
+    opacity: 0.62;
+    font-size: 13px;
+    margin-right: 20px;
+  }
+}
