@@ -15,36 +15,26 @@ export class HostController {
     Host.find()
       .populate('applications')
       .exec(function (err, hosts) {
-        if (err){
-          if(err.kind === 'ObjectId') {
-            return res.status(404).send({
-              message: "Host not found with given host url " + req.params.hostUrl
-            });
-          }
-          return res.status(500).send({
-            message: "Error retrieving Host with given host Id " + req.params.hostUrl
-          });
-        }
         res.status(200).json({hosts});
       });
   }
 
   /**
-   * GET /hosts/:hostUrl/applications
+   * GET /hosts/:hostname/applications
    * Get list of applications for a given host.
    */
   public listApplicationsByHost(req: Request, res: Response) {
-    Host.findOne({url: req.params.hostUrl})
+    Host.findOne({url: req.params.hostname})
       .populate('applications')
       .exec(function (err, hosts) {
         if (err){
           if(err.kind === 'ObjectId') {
             return res.status(404).send({
-              message: "Application not found with given host url " + req.params.hostUrl
+              message: "Application not found with given host url " + req.params.hostname
             });
           }
           return res.status(500).send({
-            message: "Error retrieving host with given url " + req.params.hostUrl
+            message: "Error retrieving host with given url " + req.params.hostname
           });
         }
         res.status(200).json({applications: hosts.applications});
@@ -52,11 +42,11 @@ export class HostController {
   }
 
   /**
-   * PUT /hosts/:hostUrl/applications/:applicationId
+   * PUT /hosts/:hostname/applications/:applicationId
    * Add application to a given host
    */
   public addApplicationToHost(req: Request, res: Response) {
-    Host.findOne({url: req.params.hostUrl})
+    Host.findOne({url: req.params.hostname})
       .exec(async (err, host) => {
         if(!host) {
           return res.status(404).json({
@@ -92,11 +82,11 @@ export class HostController {
   }
 
   /**
-   * PUT /hosts/:hostUrl/remove/applications/:applicationId
+   * PUT /hosts/:hostname/remove/applications/:applicationId
    * Remove application to a given host
    */
   public deleteApplicationFromHost(req: Request, res: Response) {
-    Host.findOne({url: req.params.hostUrl})
+    Host.findOne({url: req.params.hostname})
       .exec(async (err, host) => {
         if (!host) {
           return res.status(404).json({

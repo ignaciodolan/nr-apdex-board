@@ -3,7 +3,7 @@ import * as mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const hostSchema = new Schema({
-  url: {
+  hostname: {
     type: String,
     required: 'Enter url'
   },

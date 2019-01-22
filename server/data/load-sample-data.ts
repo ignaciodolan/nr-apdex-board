@@ -25,12 +25,12 @@ async function saveHosts(applications) {
   });
   console.log(allHosts);
   const hosts = [...new Set(allHosts)];
-  for (let hostUrl of hosts) {
+  for (let hostname of hosts) {
     let host = new Host({
-        url: hostUrl
+        hostname: hostname
       }
     );
-    await Host.findOne({ url: hostUrl }, async (err, existingHost) => {
+    await Host.findOne({ hostname: hostname }, async (err, existingHost) => {
       if (err) {
         console.log(err);
         return;
@@ -45,14 +45,14 @@ async function saveHosts(applications) {
           return;
         }
       });
-      console.log(`Host: ${hostUrl} saved`);
+      console.log(`Host: ${hostname} saved`);
     });
   }
 }
 
 async function pushApplicationToHosts(hosts, application) {
-  for (let hostUrl of hosts) {
-    await Host.findOne({ url: hostUrl }, async (err, existingHost) => {
+  for (let hostname of hosts) {
+    await Host.findOne({ hostname: hostname }, async (err, existingHost) => {
       if (err) {
         console.log(err);
         return;
@@ -61,7 +61,7 @@ async function pushApplicationToHosts(hosts, application) {
         console.log('Host doesn\'t exists <- Investigate why');
         return;
       }
-      console.log(`Host to be pushed ${existingHost.url} for ${application.name}`);
+      console.log(`Host to be pushed ${existingHost.hostname} for ${application.name}`);
       existingHost.applications.push(application._id);
       await existingHost.save()
     });
