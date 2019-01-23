@@ -1,20 +1,15 @@
-import {Request, Response} from "express";
 
-import { HostController } from "./controllers/hostController";
+const express = require('express');
+const router = express.Router();
 
-export class Routes {
+import * as hostController from "./controllers/hostController";
+import * as applicationController from "./controllers/applicationController";
 
-  public hostController: HostController = new HostController();
+router.get('/hosts', hostController.listHosts);
+router.put('/hosts/:hostname/applications/:applicationId', hostController.addApplicationToHost);
+router.delete('/hosts/:hostname/applications/:applicationId', hostController.deleteApplicationFromHost);
 
-  public routes(app): void {
-    app.route('/hosts').get(this.hostController.listHosts);
-    app.route('/hosts/:hostname/applications/').get(this.hostController.listApplicationsByHost);
-    app.route('/hosts/:hostname/applications/add/:applicationId').put(this.hostController.addApplicationToHost);
-    app.route('/hosts/:hostname/applications/remove/:applicationId').put(this.hostController.deleteApplicationFromHost);
-    // change to:
-    // hosts/
-    // applications/?hostname=
-    // hosts/:hostname/applications/:applicationId put/delete
-  }
-}
+router.get('/applications/', applicationController.listApplicationsByHost);
 
+
+module.exports = router;

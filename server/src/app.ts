@@ -5,31 +5,24 @@ import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
 import * as expressValidator from "express-validator";
 import * as cors from 'cors'
+import * as routes from './routes';
 
-class App {
+const app: express.Application = express();
 
-  public app: express.Application;
-  public router: Routes = new Routes();
+dotenv.config({ path: ".env" });
 
-  constructor() {
-    this.app = express();
-    this.app.use(bodyParser.json());
-    this.app.use(bodyParser.urlencoded({ extended: false }));
-    this.app.use(expressValidator());
-    this.app.options('*', cors());
-    this.app.use(cors());
-    this.router.routes(this.app);
-    dotenv.config({ path: ".env" });
-    this.initializeMongoDB();
-  }
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
-  private initializeMongoDB(): void{
-    mongoose.Promise = global.Promise;
-    mongoose.connect(process.env.MONGODB_URI_LOCAL, { useNewUrlParser: true });
-    mongoose.connection.on('error', (err) => {
-      console.error(`Error with MongoDB connection: ${err.message}`);
-    });
-  }
-}
+app.options('*', cors());
+app.use(cors());
+app.use('/', routes);
 
-export default new App().app;
+mongoose.Promise = global.Promise;
+mongoose.connect(process.env.MONGODB_URI_LOCAL, { useNewUrlParser: true });
+mongoose.connection.on('error', (err) => {
+  console.error(`Error with MongoDB connection: ${err.message}`);
+});
+
+export default app;

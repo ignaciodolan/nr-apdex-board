@@ -103,7 +103,7 @@ async function createNewApplication(applicationObj) {
 
 async function loadData() {
   try {
-    const applications = hostAppData.slice(0,5);
+    const applications = hostAppData;
     await saveHosts(applications);
 
     // recorro las applications
