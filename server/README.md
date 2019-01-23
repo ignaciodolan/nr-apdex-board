@@ -41,3 +41,11 @@ In order to delete it run:
 ```
 npm run delete-data
 ```
+
+#### Other
+* I encourage to use at least v10.12.0 of node
+* In order to run tests
+```
+npm run test
+```
+
