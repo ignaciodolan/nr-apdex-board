@@ -2,21 +2,41 @@ import React, { Component } from 'react';
 import './App.scss';
 import Host from '../Host/Host';
 import Header from '../Header/Header';
+import {HostService} from '../../services/HostService';
+import { HostModel } from '../../models/Host';
 
-export interface State {
+interface State {
   showAsList: boolean;
+  hosts: Array<HostModel>;
 }
 
-class App extends Component<{}, State> {
-  constructor(props: any) {
+interface Props {
+
+}
+class App extends Component<Props, State> {
+  hostService: HostService;
+  constructor(props: Props) {
     super(props);
     this.state = {
-      showAsList: false
+      showAsList: false,
+      hosts: []
     };
+    this.hostService = new HostService();
     this.handleLayoutChange = this.handleLayoutChange.bind(this);
   }
 
-  handleLayoutChange(showAsList: boolean) {
+  public componentDidMount() {
+    try {
+      this.hostService.fetchHosts()
+        .then((hosts) => {
+          this.setState({ hosts });
+        });
+    } catch (e) {
+      console.log(e);
+    }
+
+  }
+  public handleLayoutChange(showAsList: boolean) {
     this.setState({
       showAsList: showAsList
     })
@@ -30,9 +50,15 @@ class App extends Component<{}, State> {
           onChangeLayout={this.handleLayoutChange}
         ></Header>
         <section className="body">
-          <Host
-            showAsList={this.state.showAsList}
-          ></Host>
+          {
+            this.state.hosts.map((host) =>
+              <Host
+                showAsList={this.state.showAsList}
+                host={host}
+                key={host.hostname}
+              ></Host>
+            )
+          }
         </section>
       </div>
     );

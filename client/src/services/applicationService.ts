@@ -1,12 +1,24 @@
-import {Application} from "../models/Application";
+import {ApplicationModel} from "../models/Application";
+import {Config} from "../config";
+import axios from 'axios';
 
-class ApplicationService {
-  public baseURL: string = '/applications';
+export class ApplicationService {
+  public baseURL: string = `${Config.API_URL}/applications`;
 
-  public fetchApplicationsByHost(hostname: string): Promise<Application[]> {
-    const applicationsURL = `${this.baseURL}/?hostname=${hostname}`;
+  /**
+   * Fetch hosts
+   * Get all hosts with their top 25 applications ordered by its apdex
+   */
+  public getTopAppsByHost(hostname: string): Promise<ApplicationModel[]> {
+    const hostURL = `${this.baseURL}/?hostname=${hostname}`;
 
-    return fetch(applicationsURL)
-      .then((response) => (response.json()))
+    return axios.get(hostURL)
+      .then((response) => {
+        if (response.data && response.data.error) {
+          throw new Error(response.data.message);
+        }
+
+        return response.data.applications;
+      })
   };
 }

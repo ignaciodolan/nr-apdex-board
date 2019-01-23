@@ -1,9 +1,9 @@
 
-import {Application} from "./Application";
+import {ApplicationModel} from "./Application";
 
-export interface Host {
+export interface HostModel {
   hostname: string;
-  applications: [Application];
+  applications: ApplicationModel[];
   created_at: Date;
   updated_at: Date;
 }

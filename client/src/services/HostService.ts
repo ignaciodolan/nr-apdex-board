@@ -1,12 +1,27 @@
-import {Host} from "../models/Host";
+import {HostModel} from "../models/Host";
+import axios from 'axios';
+import {Config} from "../config";
+import {ApplicationModel} from "../models/Application";
 
-class ApplicationService {
-  public baseURL: string = '/hosts';
+export class HostService {
+  public baseURL: string = `${Config.API_URL}/hosts`;
 
-  public fetchHosts(): Promise<Host[]> {
+  /**
+   * Fetch hosts
+   * Get all hosts with their top 5 applications ordered by its apdex
+   */
+  public fetchHosts(): Promise<HostModel[]> {
     const hostURL = `${this.baseURL}`;
 
-    return fetch(hostURL)
-      .then((response) => (response.json()))
+    return axios.get(hostURL)
+      .then((response) => {
+
+        if (response.data && response.data.error) {
+          throw new Error(response.data.message);
+        }
+
+        return response.data.hosts;
+      });
   };
+
 }

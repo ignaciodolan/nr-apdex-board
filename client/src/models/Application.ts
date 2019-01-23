@@ -1,5 +1,5 @@
 
-export interface Application {
+export interface ApplicationModel {
   name: string;
   contributors: [string];
   version: number;

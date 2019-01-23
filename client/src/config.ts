@@ -1,3 +1,3 @@
-/**
- * Created by ignaciodolan on 1/21/19.
- */
+export const Config = {
+  API_URL: 'http://localhost:3001'
+};
