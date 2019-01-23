@@ -1,8 +1,8 @@
 - Set up your .env file.
--> Rename or copy .env.example to .env
--> Setup credentials
+  * Rename or copy .env.example to .env
+  * Setup credentials
 
-- Configure your mongoDB server
+#### Configure your mongoDB server
 ```bash
 # create the db directory
 sudo mkdir -p /data/db
@@ -17,12 +17,12 @@ Replace in src/app.ts line 23 MONGODB_URI_LOCAL with MONGODB_URI
 ```
 mongod
 ```
-- Installing dependencies run
+#### Installing dependencies
 ```
 npm install
 ```
 
-- Build and run the project 
+#### Build and run the project 
 ```
 npm run build
 npm start
