@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 const hostSchema = new Schema({
   hostname: {
     type: String,
-    required: 'Enter url'
+    required: 'Enter hostname'
   },
   applications: [
     {

@@ -43,7 +43,7 @@ export class HostService {
    * @description Find host by its hostname
    * @param hostname: string
    */
-  private static async findHostByHostname(hostname:string): Host {
+  public static async findHostByHostname(hostname:string): Host {
     const host = await Host.findOne({hostname: hostname});
     if(!host) {
       throw new Error('Host not found');
@@ -105,7 +105,7 @@ export class HostService {
     const application = await this.findApplicationById(applicationId);
 
     if (!this.hostHasApplication(host, applicationId)) {
-      throw new Error(`Application: ${application.name} doesn't exists in ${host.hostname}`)
+      throw new Error(`Application: ${application.name} doesn't exist in ${host.hostname}`)
     }
 
     host.applications.remove(applicationId);
