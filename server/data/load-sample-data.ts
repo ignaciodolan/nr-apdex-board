@@ -18,6 +18,7 @@ async function deleteData() {
   console.log('Data deleted');
   process.exit();
 }
+
 async function saveHosts(applications) {
   let allHosts = [];
   applications.forEach((application) => {
@@ -76,14 +77,13 @@ async function createNewApplication(applicationObj) {
       apdex: applicationObj.apdex
     }
   );
-  console.log(`about to save ${application.name}`);
   await Application.findOne({ name: applicationObj.name }, async (err, existingApplication) => {
     if (err) {
       console.log(err);
       return;
     }
     if (existingApplication) {
-      console.log('application already exists');
+      console.log('Application already exists');
       return;
     }
     // Check hosts
@@ -97,7 +97,7 @@ async function createNewApplication(applicationObj) {
       }
     });
     await pushApplicationToHosts(applicationObj.host, application);
-    console.log(`Application: ${application.name} saved`);
+    console.log(`-> Application: ${application.name} saved`);
   });
 }
 
@@ -106,7 +106,6 @@ async function loadData() {
     const applications = hostAppData;
     await saveHosts(applications);
 
-    // recorro las applications
     for (let applicationObj of applications) {
       await createNewApplication(applicationObj);
     }

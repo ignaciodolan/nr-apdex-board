@@ -1,13 +1,12 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
-import { Routes } from "./routes";
 import * as dotenv from "dotenv";
 import * as mongoose from "mongoose";
 import * as expressValidator from "express-validator";
 import * as cors from 'cors'
-import * as routes from './routes';
 
-const app: express.Application = express();
+const routes = require('./routes');
+const app = express();
 
 dotenv.config({ path: ".env" });
 
@@ -17,6 +16,7 @@ app.use(expressValidator());
 
 app.options('*', cors());
 app.use(cors());
+
 app.use('/', routes);
 
 mongoose.Promise = global.Promise;

@@ -8,7 +8,7 @@ export class HostService {
    * @description Get all hosts with their top 5 (by default) applications ordered by its apdex
    * @param limitApplications: number
    */
-  public static async getHosts(limitApplications?:number = 5): Promise<Host[]> {
+  public static async getHosts(limitApplications:number = 5): Promise<any> {
     return await Host.find()
       .populate({
         path: 'applications',
@@ -25,7 +25,7 @@ export class HostService {
    * @param hostname: string
    * @param limitApplications: number
    */
-  public static async getApplicationsFromHost(hostname: string, limitApplications?:number = 25): Promise<Application[]> {
+  public static async getApplicationsFromHost(hostname: string, limitApplications:number = 25): Promise<any> {
     const host = await Host.findOne({hostname: hostname})
       .populate({
         path: 'applications',
@@ -43,7 +43,7 @@ export class HostService {
    * @description Find host by its hostname
    * @param hostname: string
    */
-  public static async findHostByHostname(hostname:string): Host {
+  public static async findHostByHostname(hostname:string) {
     const host = await Host.findOne({hostname: hostname});
     if(!host) {
       throw new Error('Host not found');
@@ -56,7 +56,7 @@ export class HostService {
    * @description Find application by its id
    * @param applicationId: string
    */
-  private static async findApplicationById(applicationId: string): Application {
+  private static async findApplicationById(applicationId: string) {
     const application = await Application.findOne({_id: applicationId});
     if(!application) {
       throw new Error('Application not found');
@@ -70,7 +70,7 @@ export class HostService {
    * @param host: Host
    * @param applicationId: string
    */
-  private static hostHasApplication(host: Host, applicationId: string): boolean {
+  private static hostHasApplication(host, applicationId: string): boolean {
     const applications = host.applications.map(obj => obj.toString());
     return applications.includes(applicationId);
   }
@@ -81,7 +81,7 @@ export class HostService {
    * @param hostname: string
    * @param applicationId: string
    */
-  public static async saveApplicationToHost(hostname: string, applicationId: string): void {
+  public static async saveApplicationToHost(hostname: string, applicationId: string) {
     const host = await this.findHostByHostname(hostname);
     const application = await this.findApplicationById(applicationId);
 
@@ -100,7 +100,7 @@ export class HostService {
    * @param hostname: string
    * @param applicationId: string
    */
-  public static async deleteApplicationFromHost(hostname: string, applicationId: string): void {
+  public static async deleteApplicationFromHost(hostname: string, applicationId: string) {
     const host = await this.findHostByHostname(hostname);
     const application = await this.findApplicationById(applicationId);
 

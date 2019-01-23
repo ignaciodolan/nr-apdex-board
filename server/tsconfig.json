@@ -7,14 +7,17 @@
     "target": "es6",
     "outDir": "./dist",
     "baseUrl": "./lib",
-    "lib": [
-      "es2017","es2015","dom","es6"
-    ]
+    "paths": {
+      "*": [
+        "node_modules/*"
+      ]
+    }
   },
   "include": [
     "**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "data"
   ]
 }

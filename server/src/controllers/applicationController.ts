@@ -16,7 +16,7 @@ export let listApplicationsByHost = async (req: Request, res: Response) => {
     });
   }
   try {
-    const applications: Application[] = await HostService.getApplicationsFromHost(hostname);
+    const applications = await HostService.getApplicationsFromHost(hostname);
     res.status(200).json({applications});
   } catch(e) {
     res.status(500).send({
