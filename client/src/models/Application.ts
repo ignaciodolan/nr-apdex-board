@@ -1,5 +1,6 @@
 
 export interface ApplicationModel {
+  _id: string;
   name: string;
   contributors: [string];
   version: number;

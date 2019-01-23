@@ -14,7 +14,12 @@ class ApplicationRow extends Component<ApplicationProps, {}> {
   }
 
   handleClick() {
-    swal('Release version:',`${this.props.application.version}`);
+    swal('Application information:',
+      `
+      Release version: ${this.props.application.version}
+      App Id: ${this.props.application._id}
+      `
+    );
   }
 
   render() {

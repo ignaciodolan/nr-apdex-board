@@ -1,0 +1,22 @@
+.edit-host {
+  &--loading {
+    display: none;
+  }
+  &__form {
+    &__input {
+      padding: 5px;
+      width: 50%;
+    }
+    &__submit {
+      margin-left: 20px;
+    }
+  }
+  &__list {
+    margin: 0;
+    padding: 10px;
+
+    &__remove-button {
+      margin-left: 10px;
+    }
+  }
+}

@@ -23,6 +23,7 @@ class App extends Component<Props, State> {
     };
     this.hostService = new HostService();
     this.handleLayoutChange = this.handleLayoutChange.bind(this);
+    this.handleHostUpdated = this.handleHostUpdated.bind(this);
   }
 
   public componentDidMount() {
@@ -34,7 +35,17 @@ class App extends Component<Props, State> {
     } catch (e) {
       console.log(e);
     }
+  }
 
+  public handleHostUpdated() {
+    try {
+      this.hostService.fetchHosts()
+        .then((hosts) => {
+          this.setState({ hosts });
+        });
+    } catch (e) {
+      console.log(e);
+    }
   }
   public handleLayoutChange(showAsList: boolean) {
     this.setState({
@@ -56,6 +67,7 @@ class App extends Component<Props, State> {
                 showAsList={this.state.showAsList}
                 host={host}
                 key={host.hostname}
+                onUpdatedHost={this.handleHostUpdated}
               ></Host>
             )
           }
