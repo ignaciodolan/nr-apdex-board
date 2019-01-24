@@ -24,3 +24,4 @@ Basic client server application that shows the list of applications running on e
 * Improve queries on the server to improve request time (currently for /hosts it takes ~10s on slow connections)
 * Create  scripts to automatize builds and deployments
 * Consider using lerna ([Lerna](https://github.com/lerna/lerna)) for monorepo
+* Better errorHandler on client and server
