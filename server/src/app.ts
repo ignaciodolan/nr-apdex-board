@@ -20,7 +20,7 @@ app.use(cors());
 app.use('/', routes);
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI_LOCAL, { useNewUrlParser: true });
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 mongoose.connection.on('error', (err) => {
   console.error(`Error with MongoDB connection: ${err.message}`);
 });

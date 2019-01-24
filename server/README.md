@@ -33,7 +33,7 @@ npm start
 npm run watch
 ```
 
-If you are using local and want to import the data.json provided run:
+If you are using local and want to import the data.json provided run (it takes around 30min to complete :scream:)
 ```
 npm run import-data
 ```

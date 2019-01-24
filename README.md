@@ -17,3 +17,10 @@ Basic client server application that shows the list of applications running on e
   It also provides a form to input the application id to be added to that host, I suggest clicking on another application
   from another host to get its application id and paste it in the form.
   
+### Backlog (in order of priority)
+* Coverage for client, currently there a none tests.
+* Add a library for state managment or consider using React Context API, currently when adding the last requisites of frontend
+ the state changes started to clutter the whole app.
+* Improve queries on the server to improve request time (currently for /hosts it takes ~10s on slow connections)
+* Create  scripts to automatize builds and deployments
+* Consider using lerna ([Lerna](https://github.com/lerna/lerna)) for monorepo
