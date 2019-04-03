@@ -1,4 +1,4 @@
-# New Relic Apdex Board
+# Apdex Board
 
 Basic client server application that shows the list of applications running on every host. 
 
